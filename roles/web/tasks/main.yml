@@ -1,0 +1,4 @@
+---
+- name: Create alfafest folder
+  file: path=/var/www/alfafest state=directory
+

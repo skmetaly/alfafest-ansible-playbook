@@ -1,0 +1,22 @@
+---
+- name: Creating alfafest database
+  mysql_db: name=alfafest state=present
+
+- name: Creating alfafest username
+  mysql_user:
+    name: alfafest
+    password: "{{ mysql_alfafest_password }}"
+    priv: '*.*:ALL'
+    state: present
+
+- name: Allowing connections from front server
+  command: 'mysql -ne "{{ item }}"'
+  with_items:
+    - GRANT ALL ON alfafest.* To alfafest@'{{ web_internal_ip }}' identified by '{{ mysql_alfafest_password }}';
+  changed_when: False
+
+- name: Reload privilege tables
+  command: 'mysql -ne "{{ item }}"'
+  with_items:
+    - FLUSH PRIVILEGES
+  changed_when: False

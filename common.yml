@@ -1,0 +1,5 @@
+---
+- name: Install common packages to all hosts
+  hosts: all
+  roles:
+    - common

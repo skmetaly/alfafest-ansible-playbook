@@ -1,0 +1,10 @@
+---
+- name: Installing nodejs
+  apt:
+    name=nodejs
+    state=present
+
+- name: Installing npm
+  apt:
+    name=npm
+    state=present

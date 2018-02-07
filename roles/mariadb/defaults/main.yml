@@ -1,0 +1,6 @@
+---
+mariadb_version: 10.0
+mysql_conf_tpl: change_me
+mysql_conf_file: settings.cnf
+root_conf_file: root-my-cnf.j2
+database_name: alfafest

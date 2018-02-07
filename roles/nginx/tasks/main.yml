@@ -1,0 +1,32 @@
+---
+- name: Installing nginx
+  apt:
+    name=nginx
+    state=present
+
+- name: Installing apache-utils
+  apt:
+    name=apache2-utils
+    state=present
+
+- name: Creating nginx main configuration
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Creating ssl folder
+  file: path=/etc/nginx/ssl state=directory
+
+- name: Creating nginx sites-available
+  file: path=/etc/nginx/sites-available state=directory
+
+- name: Creating nginx sites-enabled
+  file: path=/etc/nginx/sites-enabled state=directory
+
+- name: Deleting default nginx configuration
+  file: name=/etc/nginx/sites-enabled/default state=absent
+
+- name: Creating alfafest nginx configuration
+  template: src=alfafest.conf.j2 dest=/etc/nginx/sites-available/alfafest.conf
+
+- name: Creating link for nginx configuration
+  file: src=/etc/nginx/sites-available/alfafest.conf dest=/etc/nginx/sites-enabled/alfafest.conf state=link
+  notify: Restart nginx

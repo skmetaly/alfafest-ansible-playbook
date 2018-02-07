@@ -1,0 +1,22 @@
+- name: Installing ZSH
+  apt:
+    name=zsh
+    state=present
+
+- name: Cloning oh-my-zsh repo
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/root/.oh-my-zsh
+
+- name: Removing standard zshrc
+  file: path=/root/.zshrc state=absent
+
+- name: Creating conf folder in home directory
+  file: path=/root/conf/ state=directory owner=root
+
+- name: Deploying .zshrc
+  template: src=zshrc.in dest=/root/conf/zshrc owner=root
+
+- name: Symlinking zshrc
+  file: path=/root/.zshrc src=/root/conf/zshrc state=link owner=root
+
+- name: Setting zsh as default shell
+  user: name=root shell=/bin/zsh

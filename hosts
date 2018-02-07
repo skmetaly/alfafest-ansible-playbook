@@ -1,0 +1,9 @@
+[webservers]
+alfafest-app ansible_host=<IP> ansible_ssh_user=root
+
+[dbservers]
+alfafest-db ansible_host=<IP> ansible_ssh_user=root
+
+[webservers:vars]
+ansible_python_interpreter=/usr/bin/python3
+

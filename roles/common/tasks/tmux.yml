@@ -1,0 +1,5 @@
+---
+- name: Installing TMUX
+  apt:
+    name=tmux
+    state=present

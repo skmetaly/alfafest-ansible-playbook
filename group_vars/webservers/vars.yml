@@ -1,0 +1,4 @@
+---
+web_url: <web_app_url>
+mysql_root_password: '{{ vault_mysql_root_password}}'
+mysql_alfafest_password: '{{vault_mysql_root_password}}'

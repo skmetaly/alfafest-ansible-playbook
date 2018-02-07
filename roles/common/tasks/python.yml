@@ -1,0 +1,5 @@
+---
+- name: Installing python
+  apt:
+    name=python
+    state=present

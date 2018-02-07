@@ -1,0 +1,9 @@
+---
+- name: Install supervisord
+  apt:
+    name=supervisor
+    state=present
+  notify: restart supervisord
+
+- name: Copy alfafest supervisord config
+  template: src=alfafest.conf dest=/etc/supervisor/conf.d/alfafest-worker.conf

@@ -1,0 +1,15 @@
+---
+# Variable setup.
+- name: Including vars.
+  include_vars: "redis.yml"
+
+- name: Define redis_package.
+  set_fact:
+    redis_package: "{{ __redis_package }}"
+  when: redis_package is not defined
+
+# Setup/install tasks.
+- import_tasks: redis.yml
+
+- name: Ensure Redis is running and enabled on boot.
+  service: "name={{ redis_daemon }} state=started enabled=yes"

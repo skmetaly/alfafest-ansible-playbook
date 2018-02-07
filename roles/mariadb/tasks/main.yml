@@ -1,0 +1,8 @@
+---
+- import_tasks: mariadb.yml
+- import_tasks: mysql_secure_installation.yml
+- import_tasks: alfafest.yml
+
+- name: Adding my cnf to etc
+  template: src=etc_my.cnf dest=/etc/mysql/my.cnf owner=root group=root mode=0644
+  notify: restart mysql

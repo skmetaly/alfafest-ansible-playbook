@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  become: yes
+  roles:
+    - letsencrypt
+    - web
+    - mariadb-client
+    - redis
+    - nginx
+    - php-fpm

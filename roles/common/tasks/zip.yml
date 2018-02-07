@@ -1,0 +1,11 @@
+---
+- name: Installing zip
+  apt:
+    name=zip
+    state=present
+
+- name: Installing unzip
+  apt:
+    name=unzip
+    state=present
+

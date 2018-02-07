@@ -1,0 +1,6 @@
+---
+- name: Creating alfafestfront group
+  group: name=alfafestfront state=present
+
+- name: Creating alfafestfront username
+  user: name=alfafestfront comment="" uid=500 group=alfafestfront

@@ -1,0 +1,5 @@
+---
+mysql_root_password: '{{ vault_mysql_root_password}}'
+mysql_alfafest_password: '{{vault_mysql_ansible_password}}'
+web_internal_ip: <web_app_internal_ip>
+db_internal_ip: <db_internal_ip>
