@@ -1,4 +1,5 @@
 ---
-web_url: <web_app_url>
-mysql_root_password: '{{ vault_mysql_root_password}}'
-mysql_alfafest_password: '{{vault_mysql_root_password}}'
+web_url: <web_url>
+has_authentication: true
+authentication_username: '{{ vault_authentication_username }}'
+authentication_password: '{{ vault_authentication_password }}'

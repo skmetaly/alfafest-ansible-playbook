@@ -1,19 +1,39 @@
-server {
+#server {
     # Redirect from IP to domain name
 
-    listen 80;
-    listen 443;
-    server_name {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }};
+#    listen 80;
+#    listen 443;
+#    server_name {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }};
 
-    return 301 $scheme://{{ web_url }}$request_uri;
-}
+#    return 301 $scheme://{{ web_url }}$request_uri;
+#}
 
 server {
-    # Redirect from non-https to https
-
     listen         80;
-    server_name    {{ web_url }};
-    return         301 https://$server_name$request_uri;
+
+    # Enable this if still in development
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+
+    root /var/www/alfafest/current/public;
+    index index.php index.html index.htm;
+
+    server_name {{ web_url }};
+
+    # try files first. then reroute to index.php
+    location / {
+            try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # for all php files, send them through fastcgi to php
+    location ~ \.php$ {
+        try_files $uri /index.php =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
 }
 
 server {
@@ -30,9 +50,9 @@ server {
     server_name {{ web_url }};
 
     # SSL certs for domain
-    include snippets/ssl-{{ web_url }}.conf;
+    #include snippets/ssl-{{ web_url }}.conf;
     # Strong SSL params for A+ ssllabs test
-    include snippets/ssl-params.conf;
+    #include snippets/ssl-params.conf;
 
     # try files first. then reroute to index.php
     location / {

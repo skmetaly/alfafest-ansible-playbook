@@ -1,0 +1,13 @@
+---
+- name: Install latest passlib with apt
+  apt: pkg=python-passlib state=present
+
+- name: Creating htpasswd file for authentication
+  htpasswd:
+    path=/etc/nginx/.htpasswd
+    name={{ authentication_username }}
+    password={{ authentication_password }}
+    owner=root
+    group=www-data
+    mode=0640
+  when: has_authentication
