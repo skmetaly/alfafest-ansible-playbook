@@ -8,3 +8,4 @@
     - redis
     - nginx
     - php-fpm
+    #- supervisor
