@@ -37,7 +37,7 @@ ansible-playbook -i hosts --ask-vault-pass dbservers.yml
 
 - As you can see from nginx role and letsencrypt role, the host uses ssl certs for https
 - Certs are generated using letsencrypt and they need to be generated on the server.
-- Make sure inscrieri.alfaclub.ro is working and app is installed correctly in `/var/www/alfafest/current/public`
+- Make sure your website is working and app is installed correctly in `/var/www/alfafest/current/public`
 - Run `letsencrypt certonly -a webroot --webroot-path=/var/www/alfafest/current/public -d <your-domain>`. This should create the certs
 - `openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048` . This should generate a strong Diffie-Hellman group.
 - Restart nginx
